@@ -21,9 +21,73 @@
             feature.className || '',
           ]"
         >
-          <template v-if="feature.children">
-            <component :is="feature.children" />
+          <template v-if="feature.area === 'area-c'">
+            <div class="relative w-full h-full min-h-[300px]">
+              <video
+                src="/video/featvideo.webm"
+                :ref="
+                  (el) => {
+                    if (el) videoRef = el;
+                  }
+                "
+                class="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+                loop
+                playsinline
+                muted
+                loading="lazy"
+                preload="metadata"
+                @play="handleVideoPlay"
+                @click="handleVideoClick"
+                @error="handleVideoError"
+              />
+              <button
+                v-if="!isVideoPlaying && !videoError"
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 !bg-black flex items-center justify-center !rounded-full !border-2 !border-white z-10"
+                @click="handleVideoPlay"
+              >
+                <img
+                  src="/img/play.svg"
+                  class="w-10 h-10 ml-1"
+                  loading="lazy"
+                  alt="Play"
+                />
+              </button>
+              <div
+                v-if="videoError"
+                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white bg-black bg-opacity-80 p-4 rounded-lg"
+              >
+                <p>Video unavailable</p>
+                <button
+                  @click="
+                    videoError = false;
+                    handleVideoPlay();
+                  "
+                  class="mt-2 px-4 py-2 bg-white text-black rounded hover:bg-gray-200"
+                >
+                  Retry
+                </button>
+              </div>
+            </div>
           </template>
+
+          <template v-else-if="feature.area === 'area-d'">
+            <div
+              class="bg-[url('/img/pattern.webp')] bg-cover bg-top h-full w-full text-left"
+            >
+              <h3 class="mb-2 relative z-10">
+                {{ t("features.efficiency.title") }}
+              </h3>
+              <h4 class="mb-5 relative z-10">
+                {{ t("features.efficiency.description") }}
+              </h4>
+              <button @click="openInNewTab('https://one-click.app/register')">
+                <a href="https://one-click.app/register">{{
+                  t("common.connect")
+                }}</a>
+              </button>
+            </div>
+          </template>
+
           <template v-else>
             <img
               v-if="feature.image"
@@ -47,6 +111,7 @@
 import { ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useScrollAnimation } from "../composables/useScrollAnimation.js";
+import { openInNewTab } from "../utils";
 
 const props = defineProps({
   className: {
@@ -57,30 +122,46 @@ const props = defineProps({
 
 const { t } = useI18n();
 const [featuresRef, isFeaturesVisible] = useScrollAnimation(0.1, "-50px");
-const videoRef = ref(null);
-const isPlaying = ref(false);
 
-const handlePlay = () => {
-  if (videoRef.value) {
-    videoRef.value.play();
-    isPlaying.value = true;
+const videoRef = ref(null);
+const isVideoPlaying = ref(false);
+const videoError = ref(false);
+
+const handleVideoPlay = () => {
+  if (videoRef.value && !videoError.value) {
+    videoRef.value
+      .play()
+      .then(() => {
+        console.log("Video started playing");
+        isVideoPlaying.value = true;
+      })
+      .catch((error) => {
+        console.error("Error playing video:", error);
+        videoError.value = true;
+      });
   }
 };
 
 const handleVideoClick = () => {
-  if (videoRef.value) {
-    if (isPlaying.value) {
+  if (videoRef.value && !videoError.value) {
+    if (isVideoPlaying.value) {
       videoRef.value.pause();
-      isPlaying.value = false;
+      isVideoPlaying.value = false;
     } else {
-      videoRef.value.play();
-      isPlaying.value = true;
+      videoRef.value
+        .play()
+        .then(() => {
+          isVideoPlaying.value = true;
+        })
+        .catch((error) => {
+          videoError.value = true;
+        });
     }
   }
 };
 
-const openInNewTab = (url) => {
-  window.open(url, "_blank").focus();
+const handleVideoError = () => {
+  videoError.value = true;
 };
 
 const featuresData = computed(() => [
@@ -99,55 +180,10 @@ const featuresData = computed(() => [
   {
     area: "area-c",
     className: "relative feature-video overflow-hidden",
-    children: {
-      template: `
-        <div>
-          <video
-            src="/video/featvideo.webm"
-            ref="videoRef"
-            class="absolute top-0 left-0 w-full h-full object-cover"
-            loop
-            playsinline
-            muted
-            loading="lazy"
-            preload="metadata"
-            @play="handlePlay"
-            @click="handleVideoClick"
-          />
-          <button
-            v-if="!isPlaying"
-            class="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 !bg-black flex items-center justify-center !rounded-full !border-2 !border-white"
-            @click="handlePlay"
-          >
-            <img
-              src="/img/play.svg"
-              class="w-10 h-10"
-              loading="lazy"
-              alt="Play"
-            />
-          </button>
-        </div>
-      `,
-    },
   },
   {
     area: "area-d",
     className: "bg-[url('/img/background.svg')] bg-cover bg-top",
-    children: {
-      template: `
-        <div class="bg-[url('/img/pattern.webp')] bg-cover bg-top h-full w-full text-left">
-          <h3 class="mb-2 relative z-10">
-            {{ t("features.efficiency.title") }}
-          </h3>
-          <h4 class="mb-5 relative z-10">
-            {{ t("features.efficiency.description") }}
-          </h4>
-          <button @click="openInNewTab('https://one-click.app/register')">
-            <a href="https://one-click.app/register">{{ t("common.connect") }}</a>
-          </button>
-        </div>
-      `,
-    },
   },
   {
     image: "/img/settings.png",

@@ -1,9 +1,42 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 @import "swiper/css/scrollbar";
+
+/* dm-sans-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("fonts/dm-sans-v17-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* dm-sans-700 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("fonts/dm-sans-v17-latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* inter-regular - cyrillic_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("fonts/inter-v20-cyrillic_latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* inter-700 - cyrillic_latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  src: url("fonts/inter-v20-cyrillic_latin-700.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 
 /* Popup animations */
 @keyframes fadeIn {
@@ -358,8 +391,8 @@ button:hover {
 /* swiper */
 
 .swiper {
-  padding: 0 0 25px;
-  height: 100%;
+  padding: 0 0 25px !important;
+  height: 100% !important;
 }
 
 .tariffs .swiper {
@@ -372,16 +405,16 @@ button:hover {
   }
 }
 
-.swiper-slide {
-  height: auto;
+.overview .swiper-slide {
+  height: 100% !important;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
   background-color: #9560eb;
   border-radius: 10px;
-  width: 60px;
-  height: 60px;
+  width: 60px !important;
+  height: 60px !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -389,58 +422,58 @@ button:hover {
 
 .overview .swiper-button-next,
 .overview .swiper-button-prev {
-  top: 150px;
+  top: 150px !important;
 }
 
 .overview .swiper-button-next {
-  right: -15px;
+  right: -15px !important;
 }
 
 .overview .swiper-button-prev {
-  left: -15px;
+  left: -15px !important;
 }
 
 @media (max-width: 1024px) {
   .swiper-button-next,
   .swiper-button-prev {
-    width: 40px;
-    height: 40px;
+    width: 40px !important;
+    height: 40px !important;
   }
 
   .overview .swiper-button-next {
-    right: -5px;
+    right: -5px !important;
   }
 
   .overview .swiper-button-prev {
-    left: -5px;
+    left: -5px !important;
   }
 }
 
 @media (max-width: 640px) {
   .overview .swiper-button-next {
-    right: 0;
+    right: 0 !important;
   }
 
   .overview .swiper-button-prev {
-    left: 0;
+    left: 0 !important;
   }
 }
 
 .swiper-button-next:after,
 .swiper-button-prev:after {
-  font-size: 16px;
-  color: #fff;
+  font-size: 16px !important;
+  color: #fff !important;
 }
 
 .swiper-pagination {
-  padding: 5px 0;
+  padding: 5px 0 !important;
   bottom: -10px !important;
 }
 
 .tariffs .swiper-pagination {
   top: 0 !important;
   height: 20px !important;
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 }
 
 @media (max-width: 768px) {

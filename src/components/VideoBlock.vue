@@ -7,7 +7,7 @@
     ]"
   >
     <div
-      class="h-[382px] w-[200px] bg-[url(\'/img/phonemockup.webp\')] bg-contain bg-no-repeat relative overflow-hidden max-h-[400px]"
+      class="h-[382px] w-[200px] bg-[url('img/phonemockup.webp')] bg-contain bg-no-repeat relative overflow-hidden max-h-[400px]"
     >
       <video
         v-for="(video, index) in videos"

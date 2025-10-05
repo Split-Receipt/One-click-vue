@@ -8,18 +8,17 @@
     ]"
   >
     <div class="container relative">
-      <!-- Custom Navigation Buttons -->
       <button
         @click="handlePrevClick"
         class="swiper-button-prev"
         aria-label="Previous slide"
-      ></button>
+      />
 
       <button
         @click="handleNextClick"
         class="swiper-button-next"
         aria-label="Next slide"
-      ></button>
+      />
 
       <Swiper
         ref="swiperRef"
@@ -38,6 +37,10 @@
         :threshold="5"
         :touch-start-prevent-default="false"
         :touch-move-stop-propagation="false"
+        :navigation="{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }"
         :pagination="{
           clickable: true,
           bulletClass: 'swiper-pagination-bullet',
