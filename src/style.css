@@ -395,6 +395,10 @@ button:hover {
   height: 100% !important;
 }
 
+.overview .swiper-slide {
+  height: auto !important;
+}
+
 .tariffs .swiper {
   padding: 0 0 15px;
 }
@@ -403,10 +407,6 @@ button:hover {
   .tariffs .swiper {
     padding: 0 0 10px;
   }
-}
-
-.overview .swiper-slide {
-  height: 100% !important;
 }
 
 .swiper-button-next,
