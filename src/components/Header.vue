@@ -32,7 +32,7 @@
       ]"
     >
       <button
-        class="w-[40px] h-[40px] bg-[url(\'/img/close.svg\')] bg-center bg-no-repeat"
+        class="w-[40px] h-[40px] bg-[url('img/close.svg')] bg-center bg-no-repeat"
         style="position: absolute; top: 10px; right: 10px"
         @click="toggleMobileMenu"
       />

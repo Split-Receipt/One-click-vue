@@ -7,7 +7,7 @@
       className,
     ]"
   >
-    <div class="bg-[url('/img/pattern.webp')] bg-cover bg-top py-10 sm:py-20">
+    <div class="bg-[url('img/pattern.webp')] bg-cover bg-top py-10 sm:py-20">
       <div
         class="container flex flex-col gap-10 items-center justify-between sm:gap-15 md:gap-20 sm:flex-row"
       >

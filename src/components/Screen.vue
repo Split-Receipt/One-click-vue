@@ -8,7 +8,7 @@
     ]"
   >
     <div
-      class="bg-[url('/img/pattern.webp')] bg-[length:100%] bg-center w-screen h-screen flex flex-col items-center justify-center gap-10 relative md:px-10 px-5"
+      class="bg-[url('img/pattern.webp')] bg-[length:100%] bg-center w-screen h-screen flex flex-col items-center justify-center gap-10 relative md:px-10 px-5"
     >
       <div class="relative flex flex-col items-center md:gap-8 gap-5">
         <img

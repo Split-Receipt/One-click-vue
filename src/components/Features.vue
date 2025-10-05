@@ -72,7 +72,7 @@
 
           <template v-else-if="feature.area === 'area-d'">
             <div
-              class="bg-[url('/img/pattern.webp')] bg-cover bg-top h-full w-full text-left"
+              class="bg-[url('img/pattern.webp')] bg-cover bg-top h-full w-full text-left"
             >
               <h3 class="mb-2 relative z-10">
                 {{ t("features.efficiency.title") }}
@@ -183,7 +183,7 @@ const featuresData = computed(() => [
   },
   {
     area: "area-d",
-    className: "bg-[url('/img/background.svg')] bg-cover bg-top",
+    className: "bg-[url('img/background.svg')] bg-cover bg-top",
   },
   {
     image: "/img/settings.png",

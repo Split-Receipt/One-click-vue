@@ -19,7 +19,7 @@
           'absolute top-1/2 -translate-y-1/2 left-[47%] -translate-x-1/2 w-[170px] h-[365px] rounded-3xl transition-opacity duration-500',
           index === currentVideoIndex ? 'opacity-100' : 'opacity-0',
         ]"
-        :loop="videos.length === 1"
+        :loop="true"
         muted
         playsinline
         preload="metadata"
