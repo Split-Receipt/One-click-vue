@@ -15,10 +15,8 @@
           <h2 class="text-center" style="white-space: pre-line">
             {{ t("action.title") }}
           </h2>
-          <button class="w-full sm:max-w-[350px]">
-            <a href="https://one-click.app/register">
+          <button class="w-full sm:max-w-[350px]" @click="openInNewTab('https://one-click.app/register')">
               {{ t("action.button") }}
-            </a>
           </button>
         </div>
         <img
@@ -35,6 +33,7 @@
 <script setup>
 import { useI18n } from "vue-i18n";
 import { useScrollAnimation } from "../composables/useScrollAnimation.js";
+import { openInNewTab } from "../utils";
 
 const props = defineProps({
   className: {

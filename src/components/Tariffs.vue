@@ -26,8 +26,7 @@
           :loop="true"
           :autoplay="{
             delay: 3000,
-            disableOnInteraction: true,
-            pauseOnMouseEnter: true,
+            disableOnInteraction: false,
           }"
           :allow-touch-move="true"
           :grab-cursor="true"

@@ -9,7 +9,7 @@
     ]"
   >
     <div class="container flex flex-col gap-8">
-      <h2 class="text-center">{{ t(title) }}</h2>
+      <h2 class="text-center">{{ title }}</h2>
 
       <div class="hidden md:flex gap-4 w-full">
         <button
@@ -80,26 +80,28 @@
           <h3 class="tab-title">{{ activeTab.label }}</h3>
           <h4 class="tab-subtitle">{{ currentInfo.title }}</h4>
           <div class="tab-text">
-            <div
-              v-if="Array.isArray(currentInfo.text)"
-              v-for="(textItem, index) in currentInfo.text"
-              :key="index"
-              class="flex items-center gap-2 mb-2"
-            >
-              <img
-                src="/img/check.svg"
-                class="w-4 h-4"
-                loading="lazy"
-                alt="check"
-              />
-              <span>{{ textItem }}</span>
-            </div>
+            <template v-if="Array.isArray(currentInfo.text)">
+              <div
+                v-for="(textItem, index) in currentInfo.text"
+                :key="index"
+                class="flex items-center gap-2 mb-2"
+              >
+                <img
+                  src="/img/check.svg"
+                  class="w-4 h-4"
+                  loading="lazy"
+                  alt="check"
+                />
+                <span>{{ textItem }}</span>
+              </div>
+            </template>
             <span v-else>{{ currentInfo.text }}</span>
           </div>
-          <button class="w-1/2 mt-6">
-            <a href="https://one-click.app/register">
-              {{ t("common.register") }}
-            </a>
+          <button
+            class="w-1/2 mt-6"
+            @click="openInNewTab('https://one-click.app/register')"
+          >
+            {{ t("common.register") }}
           </button>
         </div>
         <div>
@@ -122,6 +124,7 @@ import { ref, computed, onMounted, onUnmounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useScrollAnimation } from "../composables/useScrollAnimation.js";
 import VideoBlock from "./VideoBlock.vue";
+import { openInNewTab } from "../utils";
 
 const props = defineProps({
   className: {

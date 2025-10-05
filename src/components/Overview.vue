@@ -28,7 +28,7 @@
         :loop="true"
         :autoplay="{
           delay: 3000,
-          disableOnInteraction: true,
+          disableOnInteraction: false,
         }"
         :allow-touch-move="true"
         :grab-cursor="true"
@@ -68,8 +68,11 @@
         </SwiperSlide>
       </Swiper>
     </div>
-    <button class="m-auto block w-[300px] mt-10">
-      <a href="https://one-click.app/register">{{ t("common.register") }}</a>
+    <button
+      class="m-auto block w-[300px] mt-10"
+      @click="openInNewTab('https://one-click.app/register')"
+    >
+      {{ t("common.register") }}
     </button>
   </div>
 </template>
@@ -80,9 +83,7 @@ import { useI18n } from "vue-i18n";
 import { useScrollAnimation } from "../composables/useScrollAnimation.js";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import { openInNewTab } from "../utils";
 
 const props = defineProps({
   className: {
@@ -94,21 +95,22 @@ const props = defineProps({
 const { t } = useI18n();
 const [overviewRef, isOverviewVisible] = useScrollAnimation(0.25, "0px");
 const swiperRef = ref(null);
+const swiperInstance = ref(null);
 
 const handlePrevClick = () => {
-  if (swiperRef.value) {
-    swiperRef.value.slidePrev();
+  if (swiperInstance.value) {
+    swiperInstance.value.slidePrev();
   }
 };
 
 const handleNextClick = () => {
-  if (swiperRef.value) {
-    swiperRef.value.slideNext();
+  if (swiperInstance.value) {
+    swiperInstance.value.slideNext();
   }
 };
 
 const onSwiper = (swiper) => {
-  swiperRef.value = swiper;
+  swiperInstance.value = swiper;
 };
 
 const cardsData = computed(() => [
